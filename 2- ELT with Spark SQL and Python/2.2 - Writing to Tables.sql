@@ -92,8 +92,13 @@ SELECT * FROM books_updates
 
 -- COMMAND ----------
 
+
 MERGE INTO books b
 USING books_updates u
 ON b.book_id = u.book_id AND b.title = u.title
 WHEN NOT MATCHED AND u.category = 'Computer Science' THEN 
   INSERT *
+
+-- COMMAND ----------
+
+

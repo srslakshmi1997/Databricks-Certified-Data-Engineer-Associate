@@ -12,6 +12,14 @@ VALUES (3 INT, 2 INT, 1 INT)
 
 -- COMMAND ----------
 
+CREATE TABLE managed_default
+  (width INT, length INT, height INT);
+
+INSERT INTO managed_default
+VALUES (3 INT, 2 INT, 1 INT)
+
+-- COMMAND ----------
+
 DESCRIBE EXTENDED managed_default
 
 -- COMMAND ----------
@@ -24,10 +32,23 @@ DESCRIBE EXTENDED managed_default
 
 CREATE TABLE external_default
   (width INT, length INT, height INT)
-LOCATION 'dbfs:/mnt/demo/external_default';
+LOCATION 'dbfs:/mnt/default/external_default';
   
 INSERT INTO external_default
 VALUES (3 INT, 2 INT, 1 INT)
+
+-- COMMAND ----------
+
+OPTIMIZE external_default
+ZORDER by width;
+
+-- COMMAND ----------
+
+DESCRIBE DETAIL external_default
+
+-- COMMAND ----------
+
+DESCRIBE HISTORY external_default
 
 -- COMMAND ----------
 
@@ -45,7 +66,7 @@ DROP TABLE managed_default
 
 -- COMMAND ----------
 
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/managed_default'
+-- MAGIC %fs ls 'dbfs:/user/hive/warehouse/managed_default/'
 
 -- COMMAND ----------
 
@@ -53,7 +74,7 @@ DROP TABLE external_default
 
 -- COMMAND ----------
 
--- MAGIC %fs ls 'dbfs:/mnt/demo/external_default'
+-- MAGIC %fs ls 'dbfs:/mnt/default/external_default'
 
 -- COMMAND ----------
 
@@ -161,3 +182,7 @@ DROP TABLE external_custom;
 -- COMMAND ----------
 
 -- MAGIC %fs ls 'dbfs:/mnt/demo/external_custom'
+
+-- COMMAND ----------
+
+

@@ -72,7 +72,7 @@ SELECT * FROM csv.`${dataset.bookstore}/books-csv`
 
 -- COMMAND ----------
 
-CREATE TABLE books_csv
+CREATE TABLE hive_metastore.default.books_csv
   (book_id STRING, title STRING, author STRING, category STRING, price DOUBLE)
 USING CSV
 OPTIONS (
@@ -83,7 +83,7 @@ LOCATION "${dataset.bookstore}/books-csv"
 
 -- COMMAND ----------
 
-SELECT * FROM books_csv
+SELECT * FROM hive_metastore.default.books_csv
 
 -- COMMAND ----------
 
@@ -93,7 +93,7 @@ SELECT * FROM books_csv
 
 -- COMMAND ----------
 
-DESCRIBE EXTENDED books_csv
+DESCRIBE EXTENDED hive_metastore.default.books_csv
 
 -- COMMAND ----------
 
@@ -105,7 +105,7 @@ DESCRIBE EXTENDED books_csv
 
 -- MAGIC %python
 -- MAGIC (spark.read
--- MAGIC         .table("books_csv")
+-- MAGIC         .table("hive_metastore.default.books_csv")
 -- MAGIC       .write
 -- MAGIC         .mode("append")
 -- MAGIC         .format("csv")
@@ -121,15 +121,15 @@ DESCRIBE EXTENDED books_csv
 
 -- COMMAND ----------
 
-SELECT COUNT(*) FROM books_csv
+SELECT COUNT(*) FROM hive_metastore.default.books_csv
 
 -- COMMAND ----------
 
-REFRESH TABLE books_csv
+REFRESH TABLE hive_metastore.default.books_csv
 
 -- COMMAND ----------
 
-SELECT COUNT(*) FROM books_csv
+SELECT COUNT(*) FROM hive_metastore.default.books_csv
 
 -- COMMAND ----------
 

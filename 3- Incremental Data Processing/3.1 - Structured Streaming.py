@@ -18,6 +18,11 @@
 # COMMAND ----------
 
 (spark.readStream
+      .table("books"))
+
+# COMMAND ----------
+
+(spark.readStream
       .table("books")
       .createOrReplaceTempView("books_streaming_tmp_vw")
 )
@@ -131,3 +136,7 @@
 # MAGIC %sql
 # MAGIC SELECT *
 # MAGIC FROM author_counts
+
+# COMMAND ----------
+
+
